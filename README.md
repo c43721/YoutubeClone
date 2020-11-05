@@ -1,2 +1,2 @@
 # YoutubeClone
- Youtube clone written in React and Express
+ Youtube clone in React
