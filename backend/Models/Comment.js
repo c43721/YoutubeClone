@@ -18,6 +18,18 @@ const CommentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  userId: { //for likes and dislikes
+    type: mongoose.Schema.Types.ObjectId, // I believe this designation takes a in a mongoDB document.
+    ref: 'User'  //these generic data type: mongoose.Schema.Types.ObjectId get to an ObjectId, which is a number that id's the record in mongoDB.
+},
+  commentId: {  //for likes and dislikes
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+},
+  videoId: {  //for likes and dislikes
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Video'
+}
 });
 
 /**
