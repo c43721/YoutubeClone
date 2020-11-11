@@ -14,6 +14,14 @@ const ReplySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  dislikes: {
+    type: Number,
+    default: 0,
+  },
   date: {
     type: Date,
     default: Date.now(),
