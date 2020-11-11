@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
   videoId: {
-    type: Number,
+    type: String,
     required: true,
   },
   username: {
@@ -30,14 +30,4 @@ const CommentSchema = new mongoose.Schema({
   },
 });
 
-/**
- * Logs out every comment from Database
- */
-async function getComments() {
-  const comments = await Comment.find();
-  console.log(comments);
-}
-
-getComments();
-
-module.exports = Comment = mongoose.model("comment", CommentSchema);
+module.exports = Comment = mongoose.model("comment", CommentSchema);;
