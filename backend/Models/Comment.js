@@ -12,7 +12,6 @@ const CommentSchema = new mongoose.Schema({
   },
   reply: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
   },
   date: {
     type: Date,
