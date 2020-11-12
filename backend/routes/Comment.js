@@ -10,3 +10,66 @@ const Comment = require("../Models/Comment");
 //       res.json({ err });
 //     }
 //   });
+
+
+
+
+//We need to fix the problem of having two Comment.js files, both in the backend.
+//This is a start on getting this info for you, hopefully to revise and make work.
+//I know your aysnc/await function may be better, but I like the simplicity of 
+//the functions that I found on youTube.  Of course, you can make a function instead
+//of Comment and maybe call it at the end.  I'm really bummed my tech is always
+//having problems.  You can always text me so I can use my phone.
+
+//GET REQUEST:
+
+Comment; { //this needs a function, but this is the module/Component name.
+    axios({
+        method: 'get',
+        url: 'http://localhost:3001',
+        params: {
+            _limit: 5 //limits the list of comments to 5
+        }
+    })
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+}
+
+//POST REQUEST:
+
+Comment; {
+    axios({
+        method: 'post',
+        url: 'http://localhost:3001',
+        data: {
+            videoId,  //we need a way to imput info for these categories.
+            username,
+            text,
+            likes,
+            dislikes,
+            reply,
+            date
+        }
+    })
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+}
+
+Comment; {
+    axios({
+        method: 'put',
+        url: 'http://localhost:3001/1',
+        data: {
+            videoId,  //we need a way to imput info for these categories.
+            username,
+            text,
+            likes,
+            dislikes,
+            reply,
+            date
+        }
+    })
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+}
+
