@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const config = require("config");
 const mongoose = require("mongoose");
-const CommentRoute = require("./routes/Comment");
+const CommentRoute = require("./routes/comment-routes");
 
 const app = express();
 
@@ -23,4 +23,5 @@ try {
 }
 
 app.use(cors());
+app.use(express.json());
 app.use("/api/comments", CommentRoute);
