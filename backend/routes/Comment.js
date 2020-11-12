@@ -23,7 +23,7 @@ const Comment = require("../Models/Comment");
 
 //GET REQUEST:
 
-Comment; { //this needs a function, but this is the module/Component name.
+getComment(); { //this needs a function, but this is the module/Component name.
     axios({
         method: 'get',
         url: 'http://localhost:3001',
@@ -34,42 +34,36 @@ Comment; { //this needs a function, but this is the module/Component name.
         .then(res => console.log(res))
         .catch(err => console.error(err));
 }
+getComment();
 
 //POST REQUEST:
 
-Comment; {
+postComment(); {
     axios({
         method: 'post',
         url: 'http://localhost:3001',
         data: {
             videoId,  //we need a way to imput info for these categories.
             username,
-            text,
-            likes,
-            dislikes,
-            reply,
-            date
+            text
         }
     })
         .then(res => console.log(res))
         .catch(err => console.error(err));
 }
+postComment();
 
-Comment; {
+putComment(); {
     axios({
         method: 'put',
         url: 'http://localhost:3001/1',
         data: {
             videoId,  //we need a way to imput info for these categories.
             username,
-            text,
-            likes,
-            dislikes,
-            reply,
-            date
+            text
         }
     })
         .then(res => console.log(res))
         .catch(err => console.error(err));
 }
-
+putComment();
