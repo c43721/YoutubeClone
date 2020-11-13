@@ -30,7 +30,7 @@ router.get("/:videoId", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { username, videoId, text } = req.body;
-
+    //console.log(req);
     const newComment = new Comment({
       videoId,
       username,
