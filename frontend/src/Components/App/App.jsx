@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from "axios";
-import 'bootstrap/dist/css/bootsstrrap.min.css';
+//import 'bootstrap/dist/css/bootsstrrap.min.css';
 import { Modal } from 'bootstrap';
 
 
