@@ -7,7 +7,7 @@ export default function CommentContainer({ apiUrl }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
+    videoId.length && Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
       const { comments } = res.data;
       setComments(comments);
     });
@@ -16,8 +16,9 @@ export default function CommentContainer({ apiUrl }) {
   return (
     <div>
       <input type="text" onChange={(e) => setVideoId(e.target.value)} />
-      {comments.length &&
-        comments.map((comment) => <Comment key={comment._id} {...comment} />)}
+      {comments.length
+        ? comments.map((comment) => <Comment key={comment._id} {...comment} />)
+        : null}
     </div>
   );
 }
