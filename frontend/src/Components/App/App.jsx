@@ -1,28 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-import Axios from "axios";
+import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import CommentContainer from "../CommentContainer/CommentContainer";
 
-// const API_URL = "http://localhost:3001/";
+const API_URL = "http://localhost:3001/api";
 
 export default function App() {
   return (
     <div>
       Testing from Frontend
-      <FormElement />
+      <CommentContainer apiUrl={API_URL} />
+      {/* <FormElement /> */}
     </div>
   );
 }
-const Opinions = (props) => {
-  const [comments, setComments] = useState({});
-
-  useEffect(() => {
-    axios
-      .get("/api/comments")
-      .then((response) => setComments(response.data[props.index]));
-  }, [comments, props.index]);
-};
-//need to find an adequate axios post request, will do on Fri 11-13
 
 function FormElement() {
   const usernameRef = useRef();

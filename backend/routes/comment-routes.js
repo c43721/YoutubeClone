@@ -7,7 +7,7 @@ const router = express.Router();
 /**
  * Get all comments from MongoDB
  */
-router.get("/all", async (req, res) => {
+router.get("/", async (req, res) => {
   const comments = await Comment.find();
   res.json({ comments });
 });
