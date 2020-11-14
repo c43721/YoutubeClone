@@ -1,0 +1,21 @@
+.comment {
+    background-color: #AFAFAF;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.comment-body {
+    margin-left: 5px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+
+.comment-bottom {
+    padding: 3px;
+    margin-top: 7px;
+}
+
+.comment.reply {
+    margin-left: 50px;
+}

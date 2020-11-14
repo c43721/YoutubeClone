@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Comment from "../Comment/Comment";
+import Container from "react-bootstrap/Container";
+import CommentForm from "../CommentForm/CommentForm";
 
 export default function CommentContainer({ apiUrl }) {
   const [videoId, setVideoId] = useState("");
@@ -22,11 +24,12 @@ export default function CommentContainer({ apiUrl }) {
   }
 
   return (
-    <div>
+    <Container>
+      <CommentForm />
       <input type="text" onChange={(e) => setVideoId(e.target.value)} />
       {comments.length
         ? comments.map((comment) => <Comment key={comment._id} {...comment} />)
         : null}
-    </div>
+    </Container>
   );
 }
