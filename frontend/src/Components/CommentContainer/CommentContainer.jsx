@@ -7,11 +7,19 @@ export default function CommentContainer({ apiUrl }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    videoId.length && Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
-      const { comments } = res.data;
-      setComments(comments);
-    });
+    videoId.length &&
+      Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
+        const { comments } = res.data;
+        setComments(comments);
+      });
   }, [videoId]);
+
+  function replyToComment(parentId, ...rest) {
+    Axios.post(`${apiUrl}/reply`, {
+      parent: parentId,
+      ...rest,
+    });
+  }
 
   return (
     <div>
