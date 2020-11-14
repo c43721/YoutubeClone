@@ -23,6 +23,9 @@ export default function CommentContainer({ apiUrl }) {
     });
   }
 
+
+
+
   return (
     <Container>
       <CommentForm />
@@ -30,6 +33,7 @@ export default function CommentContainer({ apiUrl }) {
       {comments.length
         ? comments.map((comment) => <Comment key={comment._id} {...comment} />)
         : null}
+      
     </Container>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from 'axios';
+//import CommentContainer from '..CommentContainer/CommentContainer.jsx';
 
 export default function CommentForm() {
   const usernameRef = useRef();
@@ -14,8 +16,18 @@ export default function CommentForm() {
     const submittedVideo = videoRef.current.value;
 
     console.log(submittedCommentInfo, submittedUsername, submittedVideo);
-  };
+  
+    console.log(commentRef)
+    axios.post('http://localhost:3001/api/comments', commentRef)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
 
+      }
+//    };    
   return (
     <Form onSubmit={(e) => onSubmitForm(e)}>
       <Form.Group controlId="usernamefield">
@@ -38,7 +50,7 @@ export default function CommentForm() {
         />
       </Form.Group>
 
-      {/* <Form.Group controlId="videoidfield">
+       <Form.Group controlId="videoidfield">
         <Form.Label>Video ID</Form.Label>
         <Form.Control
           type="text"
@@ -46,11 +58,11 @@ export default function CommentForm() {
           ref={videoRef}
           required
         />
-      </Form.Group> */}
+      </Form.Group>
 
       <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
   );
-}
+  }
