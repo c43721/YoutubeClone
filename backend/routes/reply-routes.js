@@ -16,10 +16,9 @@ router.get("/", async (req, res) => {
  */
 router.post("/", async (req, res) => {
   try {
-    const { username, videoId, text, parent } = req.body;
+    const { username, text, parent } = req.body;
     const newReply = new Reply({
       parent,
-      videoId,
       username,
       text,
     });
