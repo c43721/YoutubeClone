@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Comment = require("./Comment");
 
 const ReplySchema = new mongoose.Schema({
   username: {
@@ -28,4 +27,5 @@ const ReplySchema = new mongoose.Schema({
   },
 });
 
-module.exports = Reply = mongoose.model("reply", ReplySchema);
+module.exports.Reply = Reply = mongoose.model("reply", ReplySchema);
+module.exports.schema = ReplySchema;

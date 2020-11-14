@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Reply = require("./Reply");
 
 const CommentSchema = new mongoose.Schema({
   videoId: {
@@ -21,13 +22,11 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  reply: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
+  reply: [Reply.schema],
   date: {
     type: Date,
     default: Date.now(),
   },
 });
 
-module.exports = Comment = mongoose.model("comment", CommentSchema);;
+module.exports = Comment = mongoose.model("comment", CommentSchema);
