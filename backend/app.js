@@ -4,6 +4,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 const CommentRoute = require("./routes/comment-routes");
 const ReplyRoute = require("./routes/reply-routes");
+const EngagementRoute = require("./routes/engagement-routes");
 
 const app = express();
 
@@ -27,3 +28,4 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/comments", CommentRoute);
 app.use("/api/reply", ReplyRoute);
+app.use("/api/engagement", EngagementRoute);
