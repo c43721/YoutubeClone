@@ -3,29 +3,33 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-export default function CommentForm({ apiUrl, isReply, videoId }) {
+export default function CommentForm({
+  apiUrl,
+  isReply,
+  videoId,
+  replyToComment,
+  setIsReply,
+}) {
   const usernameRef = useRef();
   const commentRef = useRef();
-  const videoRef = useRef();
-
-  console.log(videoId);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
     const submittedUsername = usernameRef.current.value;
     const submittedCommentInfo = commentRef.current.value;
-    const submittedVideo = videoRef.current.value;
 
     const postBody = {
-      videoId: submittedVideo,
+      videoId,
       username: submittedUsername,
       text: submittedCommentInfo,
     };
 
+    if (isReply) return replyToComment(postBody);
+
     axios
-      .post(`${apiUrl}/comments/${videoId}`, postBody)
+      .post(`${apiUrl}/comments/`, postBody)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +37,7 @@ export default function CommentForm({ apiUrl, isReply, videoId }) {
   };
 
   return (
-    <Form onSubmit={(e) => onSubmitForm(e)}>
+    <Form onSubmit={(e) => onSubmitForm(e)} className="comment-form">
       <Form.Group controlId="usernamefield">
         <Form.Label>Username</Form.Label>
         <Form.Control
@@ -54,22 +58,12 @@ export default function CommentForm({ apiUrl, isReply, videoId }) {
         />
       </Form.Group>
 
-      <Form.Group controlId="videoidfield">
-        <Form.Label>Video ID</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="542h51o641"
-          ref={videoRef}
-          required
-        />
-      </Form.Group>
-
       <Button variant="primary" type="submit">
         {isReply ? "Reply" : "Comment"}
       </Button>
 
       {isReply ? (
-        <Button variant="primary" type="submit">
+        <Button variant="primary" onClick={() => setIsReply(false)}>
           Cancel Reply
         </Button>
       ) : null}

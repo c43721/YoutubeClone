@@ -18,14 +18,16 @@ router.get("/", async (req, res) => {
 router.post("/:parentId", async (req, res) => {
   try {
     const { username, text } = req.body;
+
+    if (!username || !text) return res.json({ error: "No POST body." });
     const parentComment = await Comment.findById(req.params.parentId);
 
     if (!parentComment)
       return res.status(401).json({ error: "No parent comment ID found" });
 
     const newReply = new Reply({
-      username,
-      text,
+      username: username,
+      text: text,
       parent: req.params.parentId,
     });
 
@@ -36,6 +38,7 @@ router.post("/:parentId", async (req, res) => {
 
     res.json({ reply: newReply });
   } catch (e) {
+    console.log(e);
     res.status(500).json({ error: "Schema validation failed. " });
   }
 });
