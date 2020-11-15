@@ -9,6 +9,7 @@ export default function CommentContainer({ apiUrl, selection }) {
   const [comments, setComments] = useState([]);
   const [isReply, setIsReply] = useState(false);
   const [replyParentId, setReplyParentId] = useState("");
+  const [refreshComments, setRefreshComments] = useState(false);
 
   function updateReply(parentId) {
     setIsReply(true);
@@ -21,7 +22,7 @@ export default function CommentContainer({ apiUrl, selection }) {
         const { comments } = res.data;
         setComments(comments.reverse());
       });
-  }, [selection, comments]);
+  }, [selection, refreshComments]);
 
   function replyToComment({ username, text }) {
     try {
@@ -30,7 +31,7 @@ export default function CommentContainer({ apiUrl, selection }) {
         text,
       });
 
-      setComments([]);
+      setRefreshComments(!refreshComments);
     } catch (er) {
       console.log(er);
     }
