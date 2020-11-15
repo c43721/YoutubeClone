@@ -4,17 +4,16 @@ import Comment from "../Comment/Comment";
 import Container from "react-bootstrap/Container";
 import CommentForm from "../CommentForm/CommentForm";
 
-export default function CommentContainer({ apiUrl }) {
-  const [videoId, setVideoId] = useState("");
+export default function CommentContainer({ apiUrl, selection }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    videoId.length &&
-      Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
+    selection.length &&
+      Axios.get(`${apiUrl}/comments/${selection}`).then((res) => {
         const { comments } = res.data;
         setComments(comments);
       });
-  }, [videoId]);
+  }, [selection]);
 
   function replyToComment(parentId, ...rest) {
     Axios.post(`${apiUrl}/reply`, {
@@ -23,17 +22,12 @@ export default function CommentContainer({ apiUrl }) {
     });
   }
 
-
-
-
   return (
     <Container>
       <CommentForm />
-      <input type="text" onChange={(e) => setVideoId(e.target.value)} />
       {comments.length
         ? comments.map((comment) => <Comment key={comment._id} {...comment} />)
         : null}
-      
     </Container>
   );
 }

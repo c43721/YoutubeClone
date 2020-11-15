@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-export default function CommentForm({ apiUrl }) {
+export default function CommentForm({ apiUrl, isReply }) {
   const usernameRef = useRef();
   const commentRef = useRef();
   const videoRef = useRef();
