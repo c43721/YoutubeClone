@@ -6,6 +6,7 @@ import CommentForm from "../CommentForm/CommentForm";
 
 export default function CommentContainer({ apiUrl, selection }) {
   const [comments, setComments] = useState([]);
+  const [isReply, setIsReply] = useState(false);
 
   useEffect(() => {
     selection.length &&
@@ -24,7 +25,7 @@ export default function CommentContainer({ apiUrl, selection }) {
 
   return (
     <Container>
-      <CommentForm />
+      <CommentForm videoId={selection} isReply={isReply} />
       {comments.length
         ? comments.map((comment) => <Comment key={comment._id} {...comment} />)
         : null}

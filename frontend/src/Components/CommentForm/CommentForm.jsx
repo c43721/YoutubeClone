@@ -3,10 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-export default function CommentForm({ apiUrl, isReply }) {
+export default function CommentForm({ apiUrl, isReply, videoId }) {
   const usernameRef = useRef();
   const commentRef = useRef();
   const videoRef = useRef();
+
+  console.log(videoId);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function CommentForm({ apiUrl, isReply }) {
     };
 
     axios
-      .post(`${apiUrl}/comments`, postBody)
+      .post(`${apiUrl}/comments/${videoId}`, postBody)
       .then((response) => {
         console.log(response);
       })
@@ -63,8 +65,14 @@ export default function CommentForm({ apiUrl, isReply }) {
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        Submit
+        {isReply ? "Reply" : "Comment"}
       </Button>
+
+      {isReply ? (
+        <Button variant="primary" type="submit">
+          Cancel Reply
+        </Button>
+      ) : null}
     </Form>
   );
 }
