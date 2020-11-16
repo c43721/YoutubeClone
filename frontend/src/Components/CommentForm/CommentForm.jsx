@@ -9,6 +9,7 @@ export default function CommentForm({
   videoId,
   replyToComment,
   setIsReply,
+  refreshComments
 }) {
   const usernameRef = useRef();
   const commentRef = useRef();
@@ -29,7 +30,7 @@ export default function CommentForm({
     axios
       .post(`${apiUrl}/comments/`, postBody)
       .then((response) => {
-        console.log(response.data);
+        refreshComments()
       })
       .catch((error) => {
         console.log(error);

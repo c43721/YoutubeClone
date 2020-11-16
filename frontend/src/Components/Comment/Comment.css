@@ -19,3 +19,16 @@
 .comment.reply {
     margin-left: 50px;
 }
+
+.icon {
+    user-select: none;
+    cursor: pointer;
+}
+
+.icon.like {
+    color: green;
+}
+
+.icon.dislike {
+    color: red;
+}

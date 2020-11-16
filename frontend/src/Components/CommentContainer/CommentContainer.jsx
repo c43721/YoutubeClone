@@ -29,9 +29,50 @@ export default function CommentContainer({ apiUrl, selection }) {
       Axios.post(`${apiUrl}/reply/${replyParentId}`, {
         username,
         text,
+      }).then(() => {
+        setIsReply(false);
+        setRefreshComments(!refreshComments);
       });
+    } catch (er) {
+      console.log(er);
+    }
+  }
 
-      setRefreshComments(!refreshComments);
+  function likeComment(commentId, isComment = true, parentId = null) {
+    let options = {
+      type: "like",
+      comment: isComment,
+    };
+
+    if (!isComment) options = { ...options, parentId: parentId };
+
+    try {
+      Axios.post(
+        `${apiUrl}/engagement/${isComment ? "comment" : "reply"}/${commentId}`,
+        options
+      ).then((res) => {
+        setRefreshComments(!refreshComments);
+      });
+    } catch (er) {
+      console.log(er);
+    }
+  }
+
+  function dislikeComment(commentId, isComment = true, parentId = null) {
+    let options = {
+      type: "dislike",
+      comment: isComment,
+    };
+
+    if (!isComment) options = { ...options, parentId: parentId };
+
+    try {
+      Axios.post(
+        `${apiUrl}/engagement/${isComment ? "comment" : "reply"}/${commentId}`,
+        options
+      ).then((res) => {
+        setRefreshComments(!refreshComments);
+      });
     } catch (er) {
       console.log(er);
     }
@@ -45,10 +86,17 @@ export default function CommentContainer({ apiUrl, selection }) {
         isReply={isReply}
         replyToComment={replyToComment}
         setIsReply={setIsReply}
+        refreshComments={() => setRefreshComments(!refreshComments)}
       />
       {comments.length
         ? comments.map((comment) => (
-            <Comment key={comment._id} setReply={updateReply} {...comment} />
+            <Comment
+              key={comment._id}
+              setReply={updateReply}
+              likeComment={likeComment}
+              dislikeComment={dislikeComment}
+              {...comment}
+            />
           ))
         : null}
     </Container>
