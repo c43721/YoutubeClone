@@ -22,7 +22,7 @@ export default function CommentContainer({ apiUrl, selection }) {
         const { comments } = res.data;
         setComments(comments.reverse());
       });
-  }, [selection, refreshComments]);
+  }, [selection, refreshComments, apiUrl]);
 
   function replyToComment({ username, text }) {
     try {
