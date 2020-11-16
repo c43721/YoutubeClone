@@ -12,11 +12,11 @@ export default function App() {
   const [search, setSearch] = useState("");
 
   //Central place for the user's video selection, not for getting search result
-  const [selection, setSelection] = useState("");
+  const [selection, setSelection] = useState();
 
   //Function for when you click on a video you want to watch, will update all other components
-  function onClickVideo(videoId) {
-    setSelection(videoId);
+  function onClickVideo(video) {
+    setSelection(video);
   }
 
   return (
@@ -32,11 +32,11 @@ export default function App() {
         />
       ) : null}
 
-      {/* {selection.length ? <Video googleApiKey={GOOGLE_API_KEY} selection={selection} />} : null */}
+      {/* {selection.length ? <Video apiKey={GOOGLE_API_KEY} video={selection} />} : null */}
 
       {/* Uncomment when done with user clicking on a video to watch */}
       {selection ? (
-        <CommentContainer selection={selection} apiUrl={API_URL} />
+        <CommentContainer selection={selection.id} apiUrl={API_URL} />
       ) : null}
     </div>
   );

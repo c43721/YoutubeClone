@@ -17,7 +17,7 @@ export default function CommentContainer({ apiUrl, selection }) {
   }
 
   useEffect(() => {
-    selection.length &&
+    selection &&
       Axios.get(`${apiUrl}/comments/${selection}`).then((res) => {
         const { comments } = res.data;
         setComments(comments.reverse());
