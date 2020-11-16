@@ -1,0 +1,3 @@
+const GOOGLE_API_KEY = "YOUR KEY GOES HERE";
+
+export default GOOGLE_API_KEY;
