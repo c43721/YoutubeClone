@@ -86,7 +86,7 @@ export default function CommentContainer({ apiUrl, selection }) {
         isReply={isReply}
         replyToComment={replyToComment}
         setIsReply={setIsReply}
-        refreshComments={() => setRefreshComments(!refreshComments)}
+        refreshComments={setRefreshComments(!refreshComments)}
       />
       {comments.length
         ? comments.map((comment) => (

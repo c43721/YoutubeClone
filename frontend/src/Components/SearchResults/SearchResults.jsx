@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import youtube from "../../api/youtube";
+import Result from "./Result/Result"
 
-export default function SearchResults({ search, onClickVideoHandler, apiKey }) {
-  const [searchTerm] = useDebounce(search, 350);
+export default function SearchResults({ search, onClickVideoHandler }) {
+  const [searchTerm] = useDebounce(search, 1000);
+  const [searchResults, setSearchResults] = useState();
 
-  //Put use effect in here with the searchTerm
-  //This useEffect will render out "Result" components programmatically using .map()
+  useEffect(() => {
+    youtube
+      .get("/search", {
+        params: {
+          q: searchTerm,
+        },
+      })
+      .then((res) => {
+        const { data } = res;
+        setSearchResults(data);
+      });
+  }, [searchTerm]);
+
   //The .map will need to send the video id, this component's "onClickVideoHandler"
 
-  return <div>{searchTerm} is what you're searching for...</div>;
+  return searchResults ? (
+    <>
+      {searchResults.items.map((item) => (
+        <Result key={item.id.videoId} {...item.snippet} />
+      ))}
+    </>
+  ) : null;
 }

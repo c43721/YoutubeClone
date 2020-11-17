@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CommentContainer from "../CommentContainer/CommentContainer";
 import Search from "../Search/Search";
 import SearchResults from "../SearchResults/SearchResults";
-import GOOGLE_API_KEY from "../../config/config";
 import "./App.css";
 
 const API_URL = "http://localhost:3001/api";
@@ -28,7 +27,6 @@ export default function App() {
         <SearchResults
           onClickVideoHandler={onClickVideo}
           search={search}
-          apiKey={GOOGLE_API_KEY}
         />
       ) : null}
 

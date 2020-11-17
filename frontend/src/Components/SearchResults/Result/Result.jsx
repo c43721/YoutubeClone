@@ -5,7 +5,7 @@ export default function Result(props) {
     //Look into using reach-bootstrap's "Card"
   return (
     <div>
-      
+      {props.title}
     </div>
   );
 }

@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import "./Search.css";
 
-export default function Search({ search, setSearch }) {
+export default function Search({ setSearch }) {
+  const [searchInput, setSearchInput] = useState("");
+
   function searchForVideo(e) {
     e.preventDefault();
+    setSearch(searchInput);
   }
 
   return (
     <Form className="searchbox" onSubmit={(e) => searchForVideo(e)}>
       <Form.Group controlId="formBasicEmail">
         <Form.Control
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           type="text"
           placeholder="Search for videos..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
         />
       </Form.Group>
+      <Button type="submit">Submit</Button>
     </Form>
   );
 }
