@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 import youtube from "../../api/youtube";
-import Result from "./Result/Result"
+import Result from "./Result/Result";
 
 export default function SearchResults({ search, onClickVideoHandler }) {
-  const [searchTerm] = useDebounce(search, 1000);
-  const [searchResults, setSearchResults] = useState();
+  const [googleResponse, setGoogleResponse] = useState();
 
   useEffect(() => {
     youtube
       .get("/search", {
         params: {
-          q: searchTerm,
+          q: search,
         },
       })
       .then((res) => {
         const { data } = res;
-        setSearchResults(data);
+        setGoogleResponse(data);
       });
-  }, [searchTerm]);
+  }, [search]);
 
-  //The .map will need to send the video id, this component's "onClickVideoHandler"
-
-  return searchResults ? (
+  return googleResponse ? (
     <>
-      {searchResults.items.map((item) => (
-        <Result key={item.id.videoId} {...item.snippet} />
+      {googleResponse.items.map((item) => (
+        <Result
+          key={item.id.videoId}
+          videoId={item.id.videoId}
+          {...item.snippet}
+          onClickHandler={onClickVideoHandler}
+        />
       ))}
     </>
   ) : null;
