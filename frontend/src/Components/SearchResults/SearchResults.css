@@ -1,0 +1,8 @@
+.result-container-grid {
+    width: 75%;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 300px));
+    gap: 15px;
+    margin-bottom: 30px;
+}

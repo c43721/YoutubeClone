@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 
 export default function Result(props) {
   return (
-    <Card>
+    <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>{props.description}</Card.Text>

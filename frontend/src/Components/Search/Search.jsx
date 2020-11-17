@@ -13,7 +13,7 @@ export default function Search({ setSearch }) {
 
   return (
     <Form className="searchbox" onSubmit={(e) => searchForVideo(e)}>
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group className="input" controlId="formBasicEmail">
         <Form.Control
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
