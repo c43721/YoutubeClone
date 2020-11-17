@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import CommentForm from "../CommentForm/CommentForm";
 import "./CommentContainer.css";
 
-export default function CommentContainer({ apiUrl, selection }) {
+export default function CommentContainer({ apiUrl, videoId }) {
   const [comments, setComments] = useState([]);
   const [isReply, setIsReply] = useState(false);
   const [replyParentId, setReplyParentId] = useState("");
@@ -17,12 +17,11 @@ export default function CommentContainer({ apiUrl, selection }) {
   }
 
   useEffect(() => {
-    selection &&
-      Axios.get(`${apiUrl}/comments/${selection}`).then((res) => {
+      Axios.get(`${apiUrl}/comments/${videoId}`).then((res) => {
         const { comments } = res.data;
         setComments(comments.reverse());
       });
-  }, [selection, refreshComments, apiUrl]);
+  }, [videoId, refreshComments, apiUrl]);
 
   function replyToComment({ username, text }) {
     try {
@@ -82,7 +81,7 @@ export default function CommentContainer({ apiUrl, selection }) {
     <Container>
       <CommentForm
         apiUrl={apiUrl}
-        videoId={selection}
+        videoId={videoId}
         isReply={isReply}
         replyToComment={replyToComment}
         setIsReply={setIsReply}

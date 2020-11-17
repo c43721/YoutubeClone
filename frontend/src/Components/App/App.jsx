@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CommentContainer from "../CommentContainer/CommentContainer";
 import Search from "../Search/Search";
 import SearchResults from "../SearchResults/SearchResults";
+import Video from "../Video/Video";
 import "./App.css";
 
 const API_URL = "http://localhost:3001/api";
@@ -15,7 +16,6 @@ export default function App() {
 
   //Function for when you click on a video you want to watch, will update all other components
   function onClickVideo(video) {
-    console.log(video);
     setSelection(video);
   }
 
@@ -28,10 +28,10 @@ export default function App() {
         <SearchResults onClickVideoHandler={onClickVideo} search={search} />
       ) : null}
 
-      {/* {selection ? <Video apiKey={GOOGLE_API_KEY} video={selection} />} : null */}
+      {selection.videoId ? <Video video={selection} /> : null}
 
       {/* Uncomment when done with user clicking on a video to watch */}
-      {!selection ? (
+      {selection.videoId ? (
         <CommentContainer videoId={selection.videoId} apiUrl={API_URL} />
       ) : null}
     </div>
